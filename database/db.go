@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/labadiejoaco/jwt-auth/models"
@@ -13,9 +14,15 @@ var DB *gorm.DB
 func Connect() {
 	var err error
 
-	dsn := os.Getenv("DSN")
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s",
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_POST"),
+		os.Getenv("DB_NAME"),
+	)
 
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("Could not connect to the database")
 	}

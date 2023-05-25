@@ -20,7 +20,6 @@ func init() {
 }
 
 func main() {
-
 	r := gin.Default()
 
 	r.POST("/api/login", controllers.Login)

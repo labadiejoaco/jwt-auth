@@ -36,7 +36,6 @@ func Login(c *gin.Context) {
 	}
 
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid password",
@@ -84,7 +83,6 @@ func Signup(c *gin.Context) {
 	}
 
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to hash password",
